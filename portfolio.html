@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paramjeet Singh — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0e1712;
+    --bg-soft: #131f19;
+    --panel: #16231c;
+    --line: #2a3b32;
+    --paper: #eee8da;
+    --ink: #101613;
+    --ink-soft: #cdd6cd;
+    --muted: #7f9488;
+    --amber: #e6a339;
+    --teal: #59b7a4;
+    --red-tick: #d9694f;
+    --radius: 2px;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink-soft);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection{ background: var(--amber); color: var(--ink); }
+
+  a { color: inherit; }
+
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index: 5;
+    opacity: 0.035; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap{ max-width: 1040px; margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position: sticky; top:0; z-index: 20;
+    background: rgba(14,23,18,0.88);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height: 62px; }
+  .brand{ font-family:'IBM Plex Mono', monospace; font-size: 14px; letter-spacing: 0.03em; color: var(--paper); }
+  .brand span{ color: var(--amber); }
+  .navlinks{ display:flex; gap: 28px; font-family:'IBM Plex Mono', monospace; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .navlinks a{ text-decoration:none; color: var(--muted); transition: color .2s; position:relative; }
+  .navlinks a:hover, .navlinks a:focus-visible{ color: var(--amber); }
+  .navlinks a:focus-visible{ outline: 1px dashed var(--amber); outline-offset: 4px; }
+
+  /* ---------- HERO ---------- */
+  header.hero{ padding: 96px 0 64px; border-bottom: 1px solid var(--line); position:relative; overflow:hidden; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--teal);
+    letter-spacing: 0.14em; text-transform: uppercase; display:flex; align-items:center; gap:10px; margin-bottom: 22px;
+  }
+  .dot{ width:7px; height:7px; border-radius:50%; background: var(--teal); box-shadow: 0 0 0 3px rgba(89,183,164,0.18); animation: pulse-dot 2.4s ease-in-out infinite; }
+  @keyframes pulse-dot{ 0%,100%{ opacity:1; } 50%{ opacity:.35; } }
+
+  h1.name{
+    font-family:'Fraunces', serif; font-weight: 600; font-optical-sizing:auto;
+    font-size: clamp(42px, 7vw, 78px); line-height: 1.02; color: var(--paper); margin: 0 0 18px; letter-spacing: -0.01em;
+  }
+  .role{
+    font-family:'IBM Plex Mono', monospace; font-size: 15px; color: var(--amber); margin: 0 0 28px; letter-spacing: 0.01em;
+  }
+  .lede{ max-width: 560px; font-size: 17px; line-height: 1.65; color: var(--ink-soft); margin: 0 0 36px; }
+
+  .contact-row{ display:flex; flex-wrap:wrap; gap: 10px 14px; font-family:'IBM Plex Mono', monospace; font-size: 13px; }
+  .contact-row a{
+    text-decoration:none; color: var(--ink-soft); border:1px solid var(--line); padding: 8px 14px; border-radius: var(--radius);
+    transition: border-color .2s, color .2s, transform .15s;
+  }
+  .contact-row a:hover{ border-color: var(--amber); color: var(--amber); transform: translateY(-1px); }
+
+  /* vitals monitor signature */
+  .monitor{ margin-top: 56px; border: 1px solid var(--line); background: var(--panel); border-radius: var(--radius); }
+  .monitor-head{
+    display:flex; justify-content:space-between; align-items:center; padding: 10px 16px; border-bottom: 1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .monitor-head .lead{ color: var(--red-tick); }
+  .trace-wrap{ overflow:hidden; height: 96px; position:relative; }
+  .trace-wrap svg{ position:absolute; left:0; top:0; height:100%; width: 200%; animation: scroll-trace 8s linear infinite; }
+  @keyframes scroll-trace{ from{ transform: translateX(0); } to{ transform: translateX(-50%); } }
+  .trace-line{ fill:none; stroke: var(--teal); stroke-width: 1.6; }
+  .monitor-readout{ display:flex; gap: 28px; padding: 12px 16px; border-top: 1px solid var(--line); font-family:'IBM Plex Mono', monospace; font-size: 12px; flex-wrap:wrap; }
+  .readout-item b{ color: var(--paper); font-size: 15px; display:block; }
+  .readout-item span{ color: var(--muted); font-size: 10.5px; text-transform:uppercase; letter-spacing:.08em; }
+
+  @media (prefers-reduced-motion: reduce){
+    .trace-wrap svg{ animation: none; }
+    .dot{ animation: none; }
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{ padding: 76px 0; border-bottom: 1px solid var(--line); }
+  .sec-tag{
+    font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.14em; margin-bottom: 10px; display:flex; align-items:center; gap:10px;
+  }
+  .sec-tag::before{ content:''; width: 24px; height: 1px; background: var(--muted); }
+  h2.sec-title{ font-family:'Fraunces', serif; font-weight: 600; font-size: clamp(28px, 4vw, 40px); color: var(--paper); margin: 0 0 40px; }
+
+  /* ---------- SKILLS (stack readout) ---------- */
+  .skills-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .skill-cell{ background: var(--bg-soft); padding: 24px 22px; }
+  .skill-cell h3{
+    font-family:'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); margin: 0 0 14px;
+  }
+  .skill-cell ul{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap: 8px; }
+  .skill-cell li{
+    font-family:'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--paper); background: var(--panel);
+    border: 1px solid var(--line); padding: 5px 10px; border-radius: var(--radius);
+  }
+
+  /* ---------- PROJECTS (case files) ---------- */
+  .case{
+    display:grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 32px 0; border-top: 1px solid var(--line);
+  }
+  .case:first-of-type{ border-top: none; }
+  .case-meta{ font-family:'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--muted); }
+  .case-meta .case-id{ color: var(--amber); display:block; font-size: 13px; margin-bottom: 6px; }
+  .case-body h3{ font-family:'Fraunces', serif; font-weight:600; font-size: 22px; color: var(--paper); margin: 0 0 10px; }
+  .case-body ul{ margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 14.5px; line-height: 1.65; }
+  .case-body li{ margin-bottom: 6px; }
+  .case-body li::marker{ color: var(--teal); }
+
+  @media (max-width: 620px){
+    .case{ grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  /* ---------- CERTIFICATES ---------- */
+  .cert-list{ display:flex; flex-direction:column; gap: 0; border: 1px solid var(--line); }
+  .cert-row{
+    display:flex; justify-content:space-between; align-items:center; gap: 16px; padding: 18px 20px;
+    border-bottom: 1px solid var(--line); background: var(--bg-soft);
+  }
+  .cert-row:last-child{ border-bottom:none; }
+  .cert-name{ font-size: 15px; color: var(--paper); }
+  .cert-issuer{ font-family:'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+  .cert-date{ font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--amber); white-space: nowrap; }
+
+  /* ---------- EDUCATION (timeline chart) ---------- */
+  .timeline{ position:relative; padding-left: 28px; }
+  .timeline::before{ content:''; position:absolute; left: 5px; top: 6px; bottom: 6px; width: 1px; background: var(--line); }
+  .tl-item{ position:relative; padding-bottom: 34px; }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{ content:''; position:absolute; left: -28px; top: 4px; width: 9px; height: 9px; border-radius:50%; background: var(--bg); border: 2px solid var(--teal); }
+  .tl-item h3{ font-family:'Fraunces', serif; font-size: 19px; color: var(--paper); margin: 0 0 4px; font-weight:600; }
+  .tl-item .tl-sub{ font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .tl-item .tl-stat{ font-size: 13.5px; color: var(--amber); font-family:'IBM Plex Mono', monospace; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ padding: 48px 0 64px; }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 16px; }
+  footer p{ font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); margin:0; }
+  .back-top{ font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--teal); text-decoration:none; }
+
+  :focus-visible{ outline: 1px dashed var(--amber); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">PARAM<span>JEET</span>.SINGH</div>
+    <div class="navlinks">
+      <a href="#skills">Stack</a>
+      <a href="#projects">Case Files</a>
+      <a href="#certs">Certificates</a>
+      <a href="#education">Education</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span> Available for internships &amp; junior roles</div>
+    <h1 class="name">Paramjeet Singh</h1>
+    <p class="role">B.Tech CSE, Lovely Professional University — building applied AI &amp; NLP tools</p>
+    <p class="lede">I build tools that read messy, human data — conversations, resumes, classroom records — and turn it into something a person can act on. Most recently: an ambient AI assistant that flags gaps in doctor–patient consultations.</p>
+    <div class="contact-row">
+      <a href="mailto:paramjeetsharanjeet@gmail.com">paramjeetsharanjeet@gmail.com</a>
+      <a href="tel:+919186095209">+91 91860 95209</a>
+      <a href="https://github.com/abhibhai99" target="_blank" rel="noopener">github.com/abhibhai99</a>
+      <a href="https://www.linkedin.com/in/abhi-singh-703946393/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+
+    <div class="monitor">
+      <div class="monitor-head">
+        <span><span class="lead">●</span> LIVE READOUT</span>
+        <span id="clock-tag">SYS.STATUS — NOMINAL</span>
+      </div>
+      <div class="trace-wrap" aria-hidden="true">
+        <svg viewBox="0 0 800 96" preserveAspectRatio="none">
+          <path class="trace-line" d="M0,48 L60,48 L75,48 L85,12 L95,84 L105,48 L160,48 L400,48 L460,48 L475,48 L485,12 L495,84 L505,48 L560,48 L800,48 L860,48 L875,48 L885,12 L895,84 L905,48 L960,48 L1200,48 L1260,48 L1275,48 L1285,12 L1295,84 L1305,48 L1360,48 L1600,48"/>
+        </svg>
+      </div>
+      <div class="monitor-readout">
+        <div class="readout-item"><b>8.16</b><span>CGPA</span></div>
+        <div class="readout-item"><b>03</b><span>Shipped Projects</span></div>
+        <div class="readout-item"><b>02</b><span>Certifications</span></div>
+        <div class="readout-item"><b>2026</b><span>Latest Build</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-tag">Stack readout</div>
+    <h2 class="sec-title">What I build with</h2>
+    <div class="skills-grid">
+      <div class="skill-cell">
+        <h3>Languages</h3>
+        <ul><li>HTML</li><li>CSS</li><li>JavaScript</li><li>C</li></ul>
+      </div>
+      <div class="skill-cell">
+        <h3>Data &amp; ML</h3>
+        <ul><li>NumPy</li><li>Pandas</li><li>Matplotlib</li></ul>
+      </div>
+      <div class="skill-cell">
+        <h3>Databases &amp; Tools</h3>
+        <ul><li>MongoDB</li><li>Git</li><li>GitHub</li><li>Figma</li></ul>
+      </div>
+      <div class="skill-cell">
+        <h3>Working style</h3>
+        <ul><li>Problem solving</li><li>Team collaboration</li><li>Time management</li><li>Adaptability</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-tag">Case files</div>
+    <h2 class="sec-title">Projects</h2>
+
+    <div class="case">
+      <div class="case-meta"><span class="case-id">CASE // 03</span>Apr 2026</div>
+      <div class="case-body">
+        <h3>AI Clinical Consultation Assistant &amp; Quality Assurance Tool</h3>
+        <ul>
+          <li>Built an ambient AI assistant using NLP/LLM techniques to analyse doctor–patient conversations and monitor reported symptoms alongside physician responses.</li>
+          <li>Implemented a verification pipeline that cross-references patient complaints against prescribed treatments to instantly flag missed symptoms, such as an untreated cough.</li>
+          <li>Delivered automated post-consultation summaries with actionable suggestions, helping doctors improve diagnostic accuracy and reduce clinical oversights.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-meta"><span class="case-id">CASE // 02</span>Jun – Jul 2026</div>
+      <div class="case-body">
+        <h3>Student Performance Prediction System</h3>
+        <ul>
+          <li>Developed a machine learning model to predict student academic performance from attendance, academic, and demographic data.</li>
+          <li>Ran data preprocessing, feature engineering, EDA, and model comparison across Random Forest, Logistic Regression, and XGBoost.</li>
+          <li>Built an interactive Streamlit dashboard for performance prediction, data visualization, and identifying factors affecting student outcomes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-meta"><span class="case-id">CASE // 01</span>Sep – Oct 2025</div>
+      <div class="case-body">
+        <h3>AI-Powered Resume Analyzer &amp; Job Recommendation System</h3>
+        <ul>
+          <li>Developed an AI-powered resume analyser using Python and NLP to extract skills, education, experience, and keywords from resumes.</li>
+          <li>Implemented transformer-based semantic similarity to match candidate profiles against job descriptions and generate job-match scores.</li>
+          <li>Built a web-based application using FastAPI and React with skill-gap analysis and personalized job recommendations.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="sec-tag">Verified</div>
+    <h2 class="sec-title">Certificates</h2>
+    <div class="cert-list">
+      <div class="cert-row">
+        <div>
+          <div class="cert-name">Introduction to Artificial Intelligence</div>
+          <div class="cert-issuer">Infosys Springboard</div>
+        </div>
+        <div class="cert-date">Mar 2026</div>
+      </div>
+      <div class="cert-row">
+        <div>
+          <div class="cert-name">Data Structures &amp; Algorithms using Python</div>
+          <div class="cert-issuer">Infosys Springboard</div>
+        </div>
+        <div class="cert-date">Jan 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-tag">Record</div>
+    <h2 class="sec-title">Education</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <h3>Lovely Professional University</h3>
+        <div class="tl-sub">Bachelor of Technology, Computer Science &amp; Engineering — Phagwara, Punjab · Aug 2025 – Present</div>
+        <div class="tl-stat">CGPA 8.16</div>
+      </div>
+      <div class="tl-item">
+        <h3>APS MHOW</h3>
+        <div class="tl-sub">Higher Secondary Education — Indore, Madhya Pradesh · Jun 2022 – Mar 2024</div>
+        <div class="tl-stat">81.4%</div>
+      </div>
+      <div class="tl-item">
+        <h3>APS Samba</h3>
+        <div class="tl-sub">Secondary Education — Samba, Jammu · Apr 2021 – Mar 2022</div>
+        <div class="tl-stat">81%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Paramjeet Singh — built with intent, not a template.</p>
+    <a class="back-top" href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+  // subtle live clock in monitor head, purely decorative
+  const tag = document.getElementById('clock-tag');
+  function tick(){
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2,'0');
+    const mm = String(now.getMinutes()).padStart(2,'0');
+    const ss = String(now.getSeconds()).padStart(2,'0');
+    tag.textContent = `SYS.CLOCK — ${hh}:${mm}:${ss}`;
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
+
+</body>
+</html>
